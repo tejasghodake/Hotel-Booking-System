@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Available Hotel Rooms</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Room No</th>
+                <th>Type</th>
+                <th>Price (per night)</th>
+                <th>Status</th>
+                <th>Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.roomNumber}">101</td>
+                <td th:text="${room.type}">Single</td>
+                <td th:text="${room.price}">1500</td>
+                <td th:text="${room.available ? 'Available' : 'Booked'}"></td>
+                <td>
+                    <a th:if="${room.available}" th:href="@{'/book/' + ${room.id}}">Book</a>
+                    <span th:if="${!room.available}">-</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
